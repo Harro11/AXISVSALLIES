@@ -21,7 +21,7 @@
         #game-container {
             display: flex;
             width: 100%;
-            max-width: 1800px;
+            max-width: 2200px;
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 20px;
@@ -41,7 +41,7 @@
             background-color: #fff;
             border-left: 2px solid #333;
             overflow-y: auto;
-            max-height: 900px;
+            max-height: 1400px;
             box-sizing: border-box;
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
@@ -192,11 +192,22 @@
             z-index: 1000;
         }
         body.dark-mode #error-modal { background-color: #2c2c2c; color: #ddd; }
-        @media (max-width: 1600px) {
+        .territory-tooltip {
+            position: absolute;
+            background-color: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 10;
+            display: none;
+        }
+        @media (max-width: 2000px) {
             #game-container { flex-direction: column; align-items: center; }
             #sidebar { width: 100%; max-width: 500px; border-left: none; border-top: 2px solid #333; }
         }
-        @media (max-width: 900px) {
+        @media (max-width: 1400px) {
             canvas { width: 100%; height: auto; }
             input[type="text"], input[type="number"] { width: 100%; }
             #sidebar { padding: 15px; }
@@ -209,7 +220,7 @@
     <h1 data-i18n="title">Axis & Allies 1942 Online</h1>
     <div id="game-container">
         <div style="position: relative;">
-            <canvas id="game-canvas" width="1600" height="900" role="region" aria-label="Game Map" tabindex="0"></canvas>
+            <canvas id="game-canvas" width="2000" height="1400" role="region" aria-label="Game Map" tabindex="0"></canvas>
             <div id="zoom-controls">
                 <button onclick="zoomIn()" data-i18n="zoom-in" tabindex="0">Zoom In</button>
                 <button onclick="zoomOut()" data-i18n="zoom-out" tabindex="0">Zoom Out</button>
@@ -592,66 +603,76 @@
             carriers: { cost: 14, attack: 1, defense: 2, move: 2, type: 'naval', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 8h12v2H4zM6 10h8v2H6z"/></svg>' }
         };
 
-        // Territory positions (spread out)
+        // Territory positions (further spread out)
         const territoryPositions = {
-            'Eastern United States': { x: 200, y: 400 },
-            'Western United States': { x: 100, y: 400 },
-            'Alaska': { x: 60, y: 150 },
-            'Hawaiian Islands': { x: 300, y: 600 },
-            'Midway': { x: 350, y: 600 },
-            'Brazil': { x: 250, y: 550 },
-            'Germany': { x: 800, y: 250 },
-            'Southern Europe': { x: 800, y: 400 },
-            'Western Europe': { x: 700, y: 300 },
-            'Eastern Europe': { x: 900, y: 300 },
-            'Ukraine': { x: 900, y: 450 },
-            'Norway': { x: 800, y: 150 },
-            'Finland': { x: 900, y: 150 },
-            'United Kingdom': { x: 600, y: 250 },
-            'Russia': { x: 1000, y: 300 },
-            'Caucasus': { x: 1000, y: 450 },
-            'Soviet Far East': { x: 1200, y: 400 },
-            'Egypt': { x: 700, y: 500 },
-            'Algeria': { x: 600, y: 500 },
-            'French West Africa': { x: 500, y: 600 },
-            'Gibraltar': { x: 600, y: 400 },
-            'South Africa': { x: 700, y: 700 },
-            'Madagascar': { x: 800, y: 800 },
-            'Italian East Africa': { x: 800, y: 600 },
-            'Libya': { x: 700, y: 600 },
-            'Japan': { x: 1400, y: 400 },
-            'Manchuria': { x: 1300, y: 300 },
-            'China': { x: 1200, y: 400 },
-            'India': { x: 1000, y: 500 },
-            'Philippine Islands': { x: 1300, y: 600 },
-            'Burma': { x: 1100, y: 600 },
-            'French Indo-China': { x: 1200, y: 600 },
-            'Iwo Jima': { x: 1500, y: 500 },
-            'Okinawa': { x: 1400, y: 500 },
-            'Wake Island': { x: 400, y: 600 },
-            'Australia': { x: 1300, y: 800 },
-            'New Guinea': { x: 1400, y: 700 },
-            'Solomon Islands': { x: 1500, y: 700 },
-            'Borneo': { x: 1200, y: 700 },
-            'East Indies': { x: 1100, y: 700 },
-            'New Zealand': { x: 1400, y: 900 },
-            'Turkey': { x: 900, y: 450 },
-            'Mongolia': { x: 1100, y: 300 },
-            'SZ 1': { x: 100, y: 100 },
-            'SZ 2': { x: 600, y: 150 },
-            'SZ 3': { x: 700, y: 100 },
-            'SZ 4': { x: 800, y: 100 },
-            'SZ 5': { x: 800, y: 200 },
-            'SZ 6': { x: 1400, y: 300 },
-            'SZ 7': { x: 1300, y: 250 },
-            'SZ 8': { x: 1000, y: 600 },
-            'SZ 9': { x: 1100, y: 650 },
-            'SZ 10': { x: 350, y: 550 },
-            'SZ 11': { x: 1200, y: 650 },
-            'SZ 12': { x: 1300, y: 700 },
-            'SZ 13': { x: 1000, y: 550 },
-            'SZ 14': { x: 700, y: 650 },
-            'SZ 15': { x: 600, y: 550 }
+            'Eastern United States': { x: 400, y: 800 },
+            'Western United States': { x: 200, y: 800 },
+            'Alaska': { x: 120, y: 300 },
+            'Hawaiian Islands': { x: 600, y: 1200 },
+            'Midway': { x: 700, y: 1200 },
+            'Brazil': { x: 500, y: 1100 },
+            'Germany': { x: 1600, y: 500 },
+            'Southern Europe': { x: 1600, y: 800 },
+            'Western Europe': { x: 1400, y: 600 },
+            'Eastern Europe': { x: 1800, y: 600 },
+            'Ukraine': { x: 1800, y: 900 },
+            'Norway': { x: 1600, y: 300 },
+            'Finland': { x: 1800, y: 300 },
+            'United Kingdom': { x: 1200, y: 500 },
+            'Russia': { x: 2000, y: 600 },
+            'Caucasus': { x: 2000, y: 900 },
+            'Soviet Far East': { x: 2400, y: 800 },
+            'Egypt': { x: 1400, y: 1000 },
+            'Algeria': { x: 1200, y: 1000 },
+            'French West Africa': { x: 1000, y: 1200 },
+            'Gibraltar': { x: 1200, y: 800 },
+            'South Africa': { x: 1400, y: 1400 },
+            'Madagascar': { x: 1600, y: 1600 },
+            'Italian East Africa': { x: 1600, y: 1200 },
+            'Libya': { x: 1400, y: 1200 },
+            'Japan': { x: 2800, y: 800 },
+            'Manchuria': { x: 2600, y: 600 },
+            'China': { x: 2400, y: 800 },
+            'India': { x: 2000, y: 1000 },
+            'Philippine Islands': { x: 2600, y: 1200 },
+            'Burma': { x: 2200, y: 1200 },
+            'French Indo-China': { x: 2400, y: 1200 },
+            'Iwo Jima': { x: 3000, y: 1000 },
+            'Okinawa': { x: 2800, y: 1000 },
+            'Wake Island': { x: 800, y: 1200 },
+            'Australia': { x: 2600, y: 1600 },
+            'New Guinea': { x: 2800, y: 1400 },
+            'Solomon Islands': { x: 3000, y: 1400 },
+            'Borneo': { x: 2400, y: 1400 },
+            'East Indies': { x: 2200, y: 1400 },
+            'New Zealand': { x: 2800, y: 1800 },
+            'Turkey': { x: 1800, y: 900 },
+            'Mongolia': { x: 2200, y: 600 },
+            'SZ 1': { x: 200, y: 200 },
+            'SZ 2': { x: 1200, y: 300 },
+            'SZ 3': { x: 1400, y: 200 },
+            'SZ 4': { x: 1600, y: 200 },
+            'SZ 5': { x: 1600, y: 400 },
+            'SZ 6': { x: 2800, y: 600 },
+            'SZ 7': { x: 2600, y: 500 },
+            'SZ 8': { x: 2000, y: 1200 },
+            'SZ 9': { x: 2200, y: 1300 },
+            'SZ 10': { x: 700, y: 1100 },
+            'SZ 11': { x: 2400, y: 1300 },
+            'SZ 12': { x: 2600, y: 1400 },
+            'SZ 13': { x: 2000, y: 1100 },
+            'SZ 14': { x: 1400, y: 1300 },
+            'SZ 15': { x: 1200, y: 1100 }
+        };
+
+        // Region groups for keyboard navigation
+        const territoryRegions = {
+            Americas: ['Eastern United States', 'Western United States', 'Alaska', 'Hawaiian Islands', 'Midway', 'Brazil'],
+            Europe: ['Germany', 'Southern Europe', 'Western Europe', 'Eastern Europe', 'Ukraine', 'Norway', 'Finland', 'United Kingdom', 'Russia', 'Caucasus'],
+            Africa: ['Egypt', 'Algeria', 'French West Africa', 'Gibraltar', 'South Africa', 'Madagascar', 'Italian East Africa', 'Libya'],
+            Asia: ['Soviet Far East', 'Japan', 'Manchuria', 'China', 'India', 'Philippine Islands', 'Burma', 'French Indo-China', 'Turkey', 'Mongolia'],
+            Pacific: ['Iwo Jima', 'Okinawa', 'Wake Island', 'Australia', 'New Guinea', 'Solomon Islands', 'Borneo', 'East Indies', 'New Zealand'],
+            SeaZones: Object.keys(territoryPositions).filter(t => t.startsWith('SZ'))
         };
 
         // Canvas and p5.js setup
@@ -664,6 +685,7 @@
         let isDragging = false;
         let lastMouseX, lastMouseY;
         let diceAnimation = null;
+        let tooltip = { visible: false, x: 0, y: 0, content: '' };
         const tutorialSteps = [
             'Welcome! Click or tap a territory to select it.',
             'In Purchase Units, enter quantities and click Confirm Purchase.',
@@ -674,10 +696,10 @@
         ];
 
         function setup() {
-            let canvas = createCanvas(1600, 900);
+            let canvas = createCanvas(2000, 1400);
             canvas.parent('game-canvas');
             textAlign(CENTER, CENTER);
-            offscreenCanvas = createGraphics(1600, 900);
+            offscreenCanvas = createGraphics(2000, 1400);
             offscreenCtx = offscreenCanvas.drawingContext;
             drawStaticMap();
             canvas.elt.addEventListener('keydown', handleKeyNavigation);
@@ -687,11 +709,24 @@
         function drawStaticMap() {
             offscreenCanvas.background(220);
             try {
-                offscreenCanvas.image(mapImage, 0, 0, 1600, 900);
+                offscreenCanvas.image(mapImage, 0, 0, 2000, 1400);
             } catch (e) {
-                offscreenCanvas.fill(220);
-                offscreenCanvas.rect(0, 0, 1600, 900);
+                offscreenCanvas.fill(200, 220, 255);
+                offscreenCanvas.rect(0, 0, 2000, 1400);
             }
+            // Draw region backgrounds
+            offscreenCanvas.noStroke();
+            offscreenCanvas.fill(200, 200, 200, 50);
+            offscreenCanvas.rect(100, 200, 600, 1000); // Americas
+            offscreenCanvas.fill(200, 180, 200, 50);
+            offscreenCanvas.rect(1100, 200, 900, 700); // Europe
+            offscreenCanvas.fill(180, 200, 180, 50);
+            offscreenCanvas.rect(1000, 800, 600, 600); // Africa
+            offscreenCanvas.fill(200, 200, 180, 50);
+            offscreenCanvas.rect(1800, 500, 800, 700); // Asia
+            offscreenCanvas.fill(180, 200, 200, 50);
+            offscreenCanvas.rect(2000, 900, 800, 600); // Pacific
+            // Draw connections
             offscreenCanvas.stroke(0);
             offscreenCanvas.strokeWeight(2);
             for (let territory in gameState.connections) {
@@ -719,52 +754,71 @@
                      owner === 'USSR' ? '#990099' : '#999999');
                 if (territory === selectedTerritory) {
                     fill(255, 255, 0, 150);
-                    let pulse = sin(frameCount * 0.1) * 8 + 25;
+                    let pulse = sin(frameCount * 0.1) * 10 + 35;
                     ellipse(pos.x, pos.y, pulse, pulse);
                     fill(owner || '#999999');
                 }
-                ellipse(pos.x, pos.y, territory.startsWith('SZ') ? 20 : 25);
+                ellipse(pos.x, pos.y, territory.startsWith('SZ') ? 30 : 35);
                 stroke(0);
                 strokeWeight(1 / zoomLevel);
                 noFill();
-                ellipse(pos.x, pos.y, territory.startsWith('SZ') ? 20 : 25);
+                ellipse(pos.x, pos.y, territory.startsWith('SZ') ? 30 : 35);
                 fill(0);
                 noStroke();
-                textSize(14 / zoomLevel);
-                text(territory, pos.x, pos.y - 30 / zoomLevel);
-                text(`(${gameState.territories[territory].ipcs})`, pos.x, pos.y - 15 / zoomLevel);
+                textSize(18 / zoomLevel);
+                text(territory, pos.x, pos.y - 40 / zoomLevel);
+                textSize(16 / zoomLevel);
+                text(`(${gameState.territories[territory].ipcs})`, pos.x, pos.y - 20 / zoomLevel);
                 const units = gameState.territories[territory].units || {};
-                let xOffset = pos.x - 40;
+                let xOffset = pos.x - 60;
+                let yOffset = pos.y + 50 / zoomLevel;
+                let col = 0;
                 for (let unit in units) {
                     if (units[unit] > 0) {
+                        if (col > 2) {
+                            col = 0;
+                            yOffset += 30 / zoomLevel;
+                            xOffset = pos.x - 60;
+                        }
                         fill(owner === 'Germany' ? '#cc0000' :
                              owner === 'Japan' ? '#cc6600' :
                              owner === 'USA' ? '#0000cc' :
                              owner === 'UK' ? '#009900' :
                              owner === 'USSR' ? '#660066' : '#666666');
-                        text(unitStats[unit].icon, xOffset, pos.y + 40 / zoomLevel);
+                        text(unitStats[unit].icon, xOffset, yOffset);
                         fill(0);
-                        text(units[unit], xOffset + 20, pos.y + 40 / zoomLevel);
-                        xOffset += 40;
+                        text(units[unit], xOffset + 20, yOffset);
+                        xOffset += 60;
+                        col++;
                     }
                 }
             }
             if (diceAnimation) {
                 fill(255, 255, 255, 200);
-                rect(750, 400, 100, 100, 10);
+                rect(950, 650, 100, 100, 10);
                 fill(0);
                 textSize(40);
-                text(diceAnimation.value, 800, 450);
+                text(diceAnimation.value, 1000, 700);
                 diceAnimation.frame--;
                 if (diceAnimation.frame <= 0) diceAnimation = null;
             }
             pop();
+            // Draw tooltip
+            if (tooltip.visible) {
+                const tooltipEl = document.querySelector('.territory-tooltip');
+                tooltipEl.style.left = `${tooltip.x}px`;
+                tooltipEl.style.top = `${tooltip.y}px`;
+                tooltipEl.innerHTML = tooltip.content;
+                tooltipEl.style.display = 'block';
+            } else {
+                document.querySelector('.territory-tooltip').style.display = 'none';
+            }
         }
 
         // Load map image
         let mapImage;
         function preload() {
-            mapImage = loadImage('https://via.placeholder.com/1600x900.png?text=Axis+and+Allies+1942+Map', () => redraw(), () => {
+            mapImage = loadImage('https://via.placeholder.com/2000x1400.png?text=Axis+and+Allies+1942+Map', () => redraw(), () => {
                 showError('Failed to load map image.');
                 redraw();
             });
@@ -833,8 +887,8 @@
         }
 
         // Zoom and pan
-        function zoomIn() { zoomLevel = Math.min(zoomLevel + 0.2, 2); redraw(); }
-        function zoomOut() { zoomLevel = Math.max(zoomLevel - 0.2, 0.5); redraw(); }
+        function zoomIn() { zoomLevel = Math.min(zoomLevel + 0.2, 5); redraw(); }
+        function zoomOut() { zoomLevel = Math.max(zoomLevel - 0.2, 0.3); redraw(); }
         function mousePressed() {
             isDragging = true;
             lastMouseX = mouseX;
@@ -846,6 +900,8 @@
             if (isDragging) {
                 offsetX += (mouseX - lastMouseX) / zoomLevel;
                 offsetY += (mouseY - lastMouseY) / zoomLevel;
+                offsetX = constrain(offsetX, -2000 / zoomLevel, 2000 / zoomLevel);
+                offsetY = constrain(offsetY, -1400 / zoomLevel, 1400 / zoomLevel);
                 lastMouseX = mouseX;
                 lastMouseY = mouseY;
                 redraw();
@@ -864,6 +920,8 @@
             if (touches.length === 1 && isDragging) {
                 offsetX += (touches[0].x - lastMouseX) / zoomLevel;
                 offsetY += (touches[0].y - lastMouseY) / zoomLevel;
+                offsetX = constrain(offsetX, -2000 / zoomLevel, 2000 / zoomLevel);
+                offsetY = constrain(offsetY, -1400 / zoomLevel, 1400 / zoomLevel);
                 lastMouseX = touches[0].x;
                 lastMouseY = touches[0].y;
                 redraw();
@@ -871,20 +929,42 @@
                 let dist = dist(touches[0].x, touches[0].y, touches[1].x, touches[1].y);
                 if (!lastMouseX.dist) lastMouseX = { dist };
                 let scaleChange = dist / lastMouseX.dist;
-                zoomLevel = constrain(zoomLevel * scaleChange, 0.5, 2);
+                zoomLevel = constrain(zoomLevel * scaleChange, 0.3, 5);
                 lastMouseX = { dist };
                 redraw();
             }
             return false;
         }
         function touchEnded() { isDragging = false; lastMouseX = null; return false; }
+        function mouseMoved() {
+            let worldX = (mouseX - offsetX) / zoomLevel;
+            let worldY = (mouseY - offsetY) / zoomLevel;
+            let found = false;
+            for (let territory in territoryPositions) {
+                const pos = territoryPositions[territory];
+                if (dist(worldX, worldY, pos.x, pos.y) < (territory.startsWith('SZ') ? 30 : 35)) {
+                    const units = gameState.territories[territory].units || {};
+                    let unitList = Object.entries(units).filter(([_, count]) => count > 0).map(([unit, count]) => `${count} ${unit}`).join(', ');
+                    tooltip = {
+                        visible: true,
+                        x: mouseX + 10,
+                        y: mouseY - 10,
+                        content: `${territory}<br>Owner: ${gameState.territories[territory].owner || 'Neutral'}<br>IPCs: ${gameState.territories[territory].ipcs}<br>Units: ${unitList || 'None'}`
+                    };
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) tooltip.visible = false;
+            redraw();
+        }
         function handleTerritoryClick(x, y) {
             let worldX = (x - offsetX) / zoomLevel;
             let worldY = (y - offsetY) / zoomLevel;
             selectedTerritory = 'None';
             for (let territory in territoryPositions) {
                 const pos = territoryPositions[territory];
-                if (dist(worldX, worldY, pos.x, pos.y) < (territory.startsWith('SZ') ? 20 : 25)) {
+                if (dist(worldX, worldY, pos.x, pos.y) < (territory.startsWith('SZ') ? 30 : 35)) {
                     selectedTerritory = territory;
                     break;
                 }
@@ -895,14 +975,30 @@
 
         // Keyboard navigation
         function handleKeyNavigation(event) {
-            const territories = Object.keys(territoryPositions)];
+            const territories = Object.keys(territoryPositions);
             let currentIndex = territories.indexOf(selectedTerritory);
+            let region = Object.keys(territoryRegions).find(r => territoryRegions[r].includes(selectedTerritory)) || 'Europe';
+            let regionTerritories = territoryRegions[region];
             if (event.key === 'ArrowRight') {
-                currentIndex = (currentIndex + 1) % territories.length;
-                selectedTerritory = territories[currentIndex];
+                let indexInRegion = regionTerritories.indexOf(selectedTerritory);
+                indexInRegion = (indexInRegion + 1) % regionTerritories.length;
+                selectedTerritory = regionTerritories[indexInRegion];
             } else if (event.key === 'ArrowLeft') {
-                currentIndex = (currentIndex - 1 + territories.length) % territories.length;
-                selectedTerritory = territories[currentIndex];
+                let indexInRegion = regionTerritories.indexOf(selectedTerritory);
+                indexInRegion = (indexInRegion - 1 + regionTerritories.length) % regionTerritories.length;
+                selectedTerritory = regionTerritories[indexInRegion];
+            } else if (event.key === 'ArrowUp') {
+                const regions = Object.keys(territoryRegions);
+                let regionIndex = regions.indexOf(region);
+                regionIndex = (regionIndex - 1 + regions.length) % regions.length;
+                region = regions[regionIndex];
+                selectedTerritory = territoryRegions[region][0];
+            } else if (event.key === 'ArrowDown') {
+                const regions = Object.keys(territoryRegions);
+                let regionIndex = regions.indexOf(region);
+                regionIndex = (regionIndex + 1) % regions.length;
+                region = regions[regionIndex];
+                selectedTerritory = territoryRegions[region][0];
             } else if (event.key === 'Enter') {
                 if (selectedTerritory !== 'None') {
                     document.getElementById('combat-target').value = selectedTerritory;
@@ -938,7 +1034,6 @@
                 const content = document.getElementById(id);
                 const collapsible = content.previousElementSibling;
                 const shouldShow = id === gameState.currentPhase.toLowerCase().replace(' ', '-');
-                if (gameState.currentPhase !== 'Collect Income');
                 content.style.display = shouldShow ? 'block' : 'none';
                 collapsible.setAttribute('aria-expanded', shouldShow);
             });
@@ -946,153 +1041,3 @@
 
         // Error modal
         function showError(message) {
-            document.getElementById('error-message').textContent = message;
-            document.getElementById('error-modal').style.display = 'block';
-        }
-        function closeErrorModal() {
-            document.getElementById('error-modal').style.display = 'none';
-        }
-
-        // Theme and accessibility
-        let isDarkMode = false, isHighContrast = false, isColorblindMode = false, isSoundOn = true;
-        function toggleDarkMode() {
-            isDarkMode = !isDarkMode;
-            document.body.classList.toggle('dark-mode', isDarkMode);
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-        }
-        function toggleHighContrast() {
-            isHighContrast = !isHighContrast;
-            document.body.classList.toggle('high-contrast', isHighContrast);
-        }
-        function toggleColorblindMode() {
-            isColorblindMode = !isColorblindMode;
-            document.body.classList.toggle('colorblind-mode', isColorblindMode);
-        }
-        function toggleSound() {
-            isSoundOn = !isSoundOn;
-            document.getElementById('notification').textContent = `Sound ${isSoundOn ? 'on' : 'off'}`;
-        }
-
-        // Sound effects
-        const sounds = { dice: null, phase: null };
-        function loadSounds() {
-            sounds.dice = new Audio('https://freesound.org/data/previews/270/270333_5040935-lq.mp3');
-            sounds.phase = new Audio('https://freesound.org/data/previews/256/256128_4772966-lq.mp3');
-        }
-
-        // Notification permission
-        function requestNotificationPermission() {
-            if ('Notification' in window && Notification.permission !== 'granted') {
-                Notification.requestPermission();
-            }
-        }
-
-        // Tutorial
-        function showTutorial() {
-            const prompt = document.getElementById('tutorial-prompt');
-            if (tutorialStep < tutorialSteps.length && gameState.currentPlayer === 'Germany') {
-                prompt.innerHTML = `${tutorialSteps[tutorialStep]}<br><button onclick="nextTutorial()" data-i18n="next">Next</button> <button onclick="skipTutorial()" data-i18n="skip">Skip</button>`;
-                prompt.style.display = 'block';
-            } else {
-                prompt.style.display = 'none';
-            }
-        }
-        function nextTutorial() { tutorialStep++; localStorage.setItem('tutorialStep', tutorialStep); showTutorial(); }
-        function skipTutorial() { tutorialStep = tutorialSteps.length; localStorage.setItem('tutorialStep', tutorialStep); showTutorial(); }
-
-        // Pathfinding
-        function findPath(start, end, maxMoves) {
-            let queue = [{ node: start, dist: 0, path: [start] }];
-            let visited = new Set();
-            while (queue.length) {
-                let { node, dist, path } = queue.shift();
-                if (node === end && dist <= maxMoves) return path;
-                if (visited.has(node) || dist > maxMoves) continue;
-                visited.add(node);
-                for (let adj of gameState.connections[node] || []) {
-                    if (!visited.has(adj)) {
-                        queue.push({ node: adj, dist: dist + 1, path: [...path, adj] });
-                    }
-                }
-                queue.sort((a, b) => a.dist - b.dist);
-            }
-            return null;
-        }
-
-        // Parse units
-        function parseUnits(input) {
-            const units = {};
-            if (!input.trim()) return units;
-            input.split(',').forEach(part => {
-                const match = part.trim().match(/^(\d+)\s+([a-zA-Z]+)/);
-                if (match && unitStats[match[2]] && !isNaN(parseInt(match[1]))) {
-                    units[match[2]] = parseInt(match[1]);
-                }
-            });
-            return units;
-        }
-
-        // Validate moves
-        function validateMove(from, to, units, isCombat) {
-            if (!gameState.territories[from] || !gameState.territories[to]) {
-                showError('Invalid territory!');
-                return false;
-            }
-            if (gameState.territories[to]?.neutral && isCombat && !units.infantry) {
-                showError('Neutral territories require infantry to conquer!');
-                return false;
-            }
-            if (gameState.territories[to]?.neutral && gameState.neutralConquered[to]) {
-                showError('Neutral territory already conquered!');
-                return false;
-            }
-            const fromUnits = gameState.territories[from].units || {};
-            let maxMove = 1;
-            for (let unit in units) {
-                if (!fromUnits[unit] || units[unit] > fromUnits[unit]) {
-                    showError(`Not enough ${unit} in ${from}!`);
-                    return false;
-                }
-                if (gameState.moveHistory[from]?.[unit]?.includes(to)) {
-                    showError(`${unit} already moved this turn!`);
-                    return false;
-                }
-                maxMove = Math.max(maxMove, unitStats[unit].move);
-            }
-            const path = findPath(from, to, maxMove);
-            if (!path) {
-                showError('No valid path within move range!');
-                return false;
-            }
-            if (isCombat && gameState.territories[to].owner === gameState.currentPlayer) {
-                showError('Cannot attack own territory!');
-                return false;
-            }
-            if (!isCombat && gameState.territories[to].owner !== gameState.currentPlayer && gameState.territories[to].owner !== null && !gameState.territories[to].neutral) {
-                showError('Non-combat moves target friendly/neutral territories!');
-                return false;
-            }
-            const isSeaZone = to.startsWith('SZ');
-            let hasTransport = units.transports || 0;
-            let landUnits = (units.infantry || 0) + (units.artillery || 0);
-            for (let unit in units) {
-                const unitType = unitStats[unit].type;
-                if (unitType === 'naval' && !isSeaZone) {
-                    showError('Naval units move to sea zones!');
-                    return false;
-                }
-                if (unitType === 'land' && isSeaZone && landUnits > hasTransport * 2) {
-                    showError('Not enough transports for land units!');
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        // Game logic
-        function purchaseUnits() {
-            const units = {
-                infantry: parseInt(document.getElementById('infantry-count').value) || 0,
-                artillery: parseInt(document.getElementById('artillery-count').value) || 0,
-                tanks: parseInt(document.getElementById('tanks-count').value) || 0,
-                aag: parseInt(document.getElementById('aag-count').value)
