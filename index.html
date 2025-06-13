@@ -21,7 +21,7 @@
         #game-container {
             display: flex;
             width: 100%;
-            max-width: 2200px;
+            max-width: 2600px;
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 20px;
@@ -35,13 +35,13 @@
             touch-action: none;
         }
         #sidebar {
-            width: 400px;
+            width: 450px;
             min-width: 300px;
             padding: 20px;
             background-color: #fff;
             border-left: 2px solid #333;
             overflow-y: auto;
-            max-height: 1400px;
+            max-height: 1600px;
             box-sizing: border-box;
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
@@ -86,7 +86,7 @@
         body.dark-mode #notification, body.dark-mode #combat-log { color: #ff5555; }
         body.high-contrast #notification, body.high-contrast #combat-log { color: #ff9999; }
         #combat-log {
-            max-height: 150px;
+            max-height: 200px;
             overflow-y: auto;
             border: 1px solid #ddd;
             padding: 12px;
@@ -94,7 +94,7 @@
         }
         body.dark-mode #combat-log { border: 1px solid #555; background-color: #333; }
         body.high-contrast #combat-log { border: 1px solid #fff; background-color: #222; }
-        #unit-purchase, #combat-move, #non-combat-move, #how-to-play, #chat-box {
+        #unit-purchase, #combat-move, #non-combat-move, #how-to-play, #chat-box, #settings {
             margin-top: 10px;
         }
         input[type="number"], input[type="text"] {
@@ -107,13 +107,13 @@
         }
         body.dark-mode input { border: 1px solid #555; background-color: #333; color: #ddd; }
         body.high-contrast input { border: 1px solid #fff; background-color: #333; color: #fff; }
-        label { display: inline-block; width: 130px; font-size: 14px; }
+        label { display: inline-block; width: 150px; font-size: 14px; }
         #how-to-play { font-size: 14px; line-height: 1.6; }
         #phase-progress {
             width: 100%;
-            height: 25px;
+            height: 30px;
             background-color: #ddd;
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
             margin: 10px 0;
         }
@@ -126,7 +126,7 @@
         .tooltip { position: relative; display: inline-block; }
         .tooltip .tooltiptext {
             visibility: hidden;
-            width: 140px;
+            width: 160px;
             background-color: #333;
             color: #fff;
             text-align: center;
@@ -136,7 +136,7 @@
             z-index: 1;
             bottom: 125%;
             left: 50%;
-            margin-left: -70px;
+            margin-left: -80px;
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -152,7 +152,7 @@
             border-radius: 6px;
         }
         body.dark-mode #zoom-controls, body.dark-mode #theme-controls { background-color: rgba(0,0,0,0.8); }
-        #theme-controls { left: 100px; }
+        #theme-controls { left: 120px; }
         #zoom-controls button, #theme-controls button { margin: 3px 0; padding: 8px; font-size: 14px; }
         #tutorial-prompt {
             position: fixed;
@@ -163,14 +163,14 @@
             color: white;
             padding: 25px;
             border-radius: 10px;
-            max-width: 450px;
+            max-width: 500px;
             text-align: center;
             display: none;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
         #chat-box {
-            max-height: 200px;
+            max-height: 250px;
             overflow-y: auto;
             border: 1px solid #ddd;
             padding: 12px;
@@ -196,18 +196,34 @@
             position: absolute;
             background-color: rgba(0,0,0,0.8);
             color: #fff;
-            padding: 8px;
-            border-radius: 4px;
-            font-size: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
             pointer-events: none;
             z-index: 10;
             display: none;
+            animation: fadeIn 0.3s;
         }
-        @media (max-width: 2000px) {
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .unit-icon { display: inline-block; width: 20px; height: 20px; vertical-align: middle; }
+        .context-menu {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: none;
+        }
+        body.dark-mode .context-menu { background-color: #2c2c2c; border: 1px solid #555; color: #ddd; }
+        .context-menu ul { list-style: none; padding: 0; margin: 0; }
+        .context-menu li { padding: 8px 16px; cursor: pointer; }
+        .context-menu li:hover { background-color: #f0f0f0; }
+        body.dark-mode .context-menu li:hover { background-color: #3c3c3c; }
+        @media (max-width: 2400px) {
             #game-container { flex-direction: column; align-items: center; }
-            #sidebar { width: 100%; max-width: 500px; border-left: none; border-top: 2px solid #333; }
+            #sidebar { width: 100%; max-width: 600px; border-left: none; border-top: 2px solid #333; }
         }
-        @media (max-width: 1400px) {
+        @media (max-width: 1600px) {
             canvas { width: 100%; height: auto; }
             input[type="text"], input[type="number"] { width: 100%; }
             #sidebar { padding: 15px; }
@@ -220,7 +236,7 @@
     <h1 data-i18n="title">Axis & Allies 1942 Online</h1>
     <div id="game-container">
         <div style="position: relative;">
-            <canvas id="game-canvas" width="2000" height="1400" role="region" aria-label="Game Map" tabindex="0"></canvas>
+            <canvas id="game-canvas" width="2400" height="1600" role="region" aria-label="Game Map" tabindex="0"></canvas>
             <div id="zoom-controls">
                 <button onclick="zoomIn()" data-i18n="zoom-in" tabindex="0">Zoom In</button>
                 <button onclick="zoomOut()" data-i18n="zoom-out" tabindex="0">Zoom Out</button>
@@ -232,6 +248,8 @@
                 <button onclick="toggleSound()" data-i18n="toggle-sound" tabindex="0">Toggle Sound</button>
                 <button onclick="changeLanguage('en')" data-i18n="lang-en" tabindex="0">English</button>
                 <button onclick="changeLanguage('de')" data-i18n="lang-de" tabindex="0">German</button>
+                <button onclick="changeLanguage('fr')" data-i18n="lang-fr" tabindex="0">French</button>
+                <button onclick="changeLanguage('es')" data-i18n="lang-es" tabindex="0">Spanish</button>
             </div>
         </div>
         <div id="sidebar" role="complementary" aria-label="Game Controls">
@@ -253,6 +271,7 @@
             <button onclick="repairFactory()" aria-label="Repair factory damage" data-i18n="repair-factory" tabindex="0">Repair Factory</button>
             <button onclick="saveGame()" aria-label="Save game state" data-i18n="save-game" tabindex="0">Save Game</button>
             <button onclick="loadGame()" aria-label="Load game state" data-i18n="load-game" tabindex="0">Load Game</button>
+            <button onclick="toggleAI()" aria-label="Toggle AI opponent" data-i18n="toggle-ai" tabindex="0">Toggle AI</button>
             <div class="collapsible" onclick="toggleSection('how-to-play')" aria-expanded="false" aria-controls="how-to-play" data-i18n="how-to-play" tabindex="0">How to Play</div>
             <div id="how-to-play" class="content">
                 <h3 data-i18n="how-to-play-title">How to Play Axis & Allies 1942 Online</h3>
@@ -261,42 +280,68 @@
             </div>
             <div class="collapsible" onclick="toggleSection('unit-purchase')" aria-expanded="false" aria-controls="unit-purchase" data-i18n="purchase-units" tabindex="0">Purchase Units</div>
             <div id="unit-purchase" class="content">
-                <p class="tooltip"><label data-i18n="infantry">Infantry (3 IPCs):</label> <input type="number" id="infantry-count" min="0" value="0" aria-label="Infantry count" tabindex="0"><span class="tooltiptext" data-i18n="infantry-tooltip">Attack: 1 (2 with artillery), Defense: 2, Move: 1</span></p>
-                <p class="tooltip"><label data-i18n="artillery">Artillery (4 IPCs):</label> <input type="number" id="artillery-count" min="0" value="0" aria-label="Artillery count" tabindex="0"><span class="tooltiptext" data-i18n="artillery-tooltip">Attack: 2, Defense: 2, Move: 1</span></p>
-                <p class="tooltip"><label data-i18n="tanks">Tanks (6 IPCs):</label> <input type="number" id="tanks-count" min="0" value="0" aria-label="Tanks count" tabindex="0"><span class="tooltiptext" data-i18n="tanks-tooltip">Attack: 3, Defense: 3, Move: 2</span></p>
-                <p class="tooltip"><label data-i18n="aag">AAG (5 IPCs):</label> <input type="number" id="aag-count" min="0" value="0" aria-label="Anti-Aircraft Gun count" tabindex="0"><span class="tooltiptext" data-i18n="aag-tooltip">Defense: 1 vs air, Move: 1</span></p>
-                <p class="tooltip"><label data-i18n="fighters">Fighters (10 IPCs):</label> <input type="number" id="fighters-count" min="0" value="0" aria-label="Fighters count" tabindex="0"><span class="tooltiptext" data-i18n="fighters-tooltip">Attack: 3, Defense: 4, Move: 4</span></p>
-                <p class="tooltip"><label data-i18n="bombers">Bombers (12 IPCs):</label> <input type="number" id="bombers-count" min="0" value="0" aria-label="Bombers count" tabindex="0"><span class="tooltiptext" data-i18n="bombers-tooltip">Attack: 4, Defense: 1, Move: 6</span></p>
-                <p class="tooltip"><label data-i18n="destroyers">Destroyers (8 IPCs):</label> <input type="number" id="destroyers-count" min="0" value="0" aria-label="Destroyers count" tabindex="0"><span class="tooltiptext" data-i18n="destroyers-tooltip">Attack: 2, Defense: 2, Move: 2 (naval)</span></p>
-                <p class="tooltip"><label data-i18n="transports">Transports (7 IPCs):</label> <input type="number" id="transports-count" min="0" value="0" aria-label="Transports count" tabindex="0"><span class="tooltiptext" data-i18n="transports-tooltip">Attack: 0, Defense: 0, Move: 2 (naval)</span></p>
-                <p class="tooltip"><label data-i18n="battleships">Battleships (20 IPCs):</label> <input type="number" id="battleships-count" min="0" value="0" aria-label="Battleships count" tabindex="0"><span class="tooltiptext" data-i18n="battleships-tooltip">Attack: 4, Defense: 4, Move: 2 (naval)</span></p>
-                <p class="tooltip"><label data-i18n="submarines">Submarines (6 IPCs):</label> <input type="number" id="submarines-count" min="0" value="0" aria-label="Submarines count" tabindex="0"><span class="tooltiptext" data-i18n="submarines-tooltip">Attack: 2, Defense: 1, Move: 2 (naval)</span></p>
-                <p class="tooltip"><label data-i18n="carriers">Carriers (14 IPCs):</label> <input type="number" id="carriers-count" min="0" value="0" aria-label="Carriers count" tabindex="0"><span class="tooltiptext" data-i18n="carriers-tooltip">Attack: 1, Defense: 2, Move: 2 (naval)</span></p>
+                <p><span id="purchase-cost">Total Cost: 0 IPCs</span></p>
+                <p class="tooltip"><label data-i18n="infantry">Infantry (3 IPCs):</label> <input type="number" id="infantry-count" min="0" value="0" aria-label="Infantry count" oninput="updatePurchaseCost()" tabindex="0"><span class="tooltiptext" data-i18n="infantry-tooltip">Attack: 1 (2 with artillery), Defense: 2, Move: 1</span></p>
+                <p class="tooltip"><label data-i18n="artillery">Artillery (4 IPCs):</label> <input type="number" id="artillery-count" min="0" value="0" aria-label="Artillery count" oninput="updatePurchaseCost()" tabindex="0"><span class="tooltiptext" data-i18n="artillery-tooltip">Attack: 2, Defense: 2, Move: 1</span></p>
+                <p class="tooltip"><label data-i18n="tanks">Tanks (6 IPCs):</label> <input type="number" id="tanks-count" min="0" value="0" aria-label="Tanks count" oninput="updatePurchaseCost()" tabindex="0"><span class="tooltiptext" data-i18n="tanks-tooltip">Attack: 3, Defense: 3, Move: 2</span></p>
+                <p class="tooltip"><label data-i18n="aag">AAG (5 IPCs):</label> <input type="number" id="aag-count" min="0" value="0" aria-label="Anti-Aircraft Gun count" oninput="updatePurchaseCost()" tabindex="0"><span class="tooltiptext" data-i18n="aag-tooltip">Defense: 1 vs air, Move: 1</span></p>
+                <p class="tooltip"><label data-i18n="fighters">Fighters (10 IPCs):</label> <input type="number" id="fighters-count" min="0" value="0" aria-label="Fighters count" oninput="updatePurchaseCost()" tabindex="0"><span class="tooltiptext" data-i18n="fighters-tooltip">Attack: 3, Defense: 4, Move: 4</span></p>
+                <p class="tooltip"><label data-i18n="bombers">Bombers (12 IPCs):</label> <input type="number" id="bombers-count" min="0" value="0" aria-label="Bombers count" oninput="updatePurchaseCost()" tabindex="0"><span class="tooltiptext" data-i18n="bombers-tooltip">Attack: 4, Defense: 1, Move: 6</span></p>
+                <p class="tooltip"><label data-i18n="destroyers">Destroyers (8 IPCs):</label> <input type="number" id="destroyers-count" min="0" value="0" aria-label="Destroyers count" oninput="updatePurchaseCost()" tabindex="0"><span class="tooltiptext" data-i18n="destroyers-tooltip">Attack: 2, Defense: 2, Move: 2 (naval)</span></p>
+                <p class="tooltip"><label data-i18n="transports">Transports (7 IPCs):</label> <input type="number" id="transports-count" min="0" value="0" aria-label="Transports count" oninput="updatePurchaseCost()" tabindex="0"><span class="tooltiptext" data-i18n="transports-tooltip">Attack: 0, Defense: 0, Move: 2 (naval)</span></p>
+                <p class="tooltip"><label data-i18n="battleships">Battleships (20 IPCs):</label> <input type="number" id="battleships-count" min="0" value="0" aria-label="Battleships count" oninput="updatePurchaseCost()" tabindex="0"><span class="tooltiptext" data-i18n="battleships-tooltip">Attack: 4, Defense: 4, Move: 2 (naval)</span></p>
+                <p class="tooltip"><label data-i18n="submarines">Submarines (6 IPCs):</label> <input type="number" id="submarines-count" min="0" value="0" aria-label="Submarines count" oninput="updatePurchaseCost()" tabindex="0"><span class="tooltiptext" data-i18n="submarines-tooltip">Attack: 2, Defense: 1, Move: 2 (naval)</span></p>
+                <p class="tooltip"><label data-i18n="carriers">Carriers (14 IPCs):</label> <input type="number" id="carriers-count" min="0" value="0" aria-label="Carriers count" oninput="updatePurchaseCost()" tabindex="0"><span class="tooltiptext" data-i18n="carriers-tooltip">Attack: 1, Defense: 2, Move: 2 (naval)</span></p>
                 <button onclick="purchaseUnits()" aria-label="Confirm unit purchase" data-i18n="confirm-purchase" tabindex="0">Confirm Purchase</button>
             </div>
             <div class="collapsible" onclick="toggleSection('combat-move')" aria-expanded="false" aria-controls="combat-move" data-i18n="combat-move" tabindex="0">Combat Move</div>
             <div id="combat-move" class="content">
+                <p><label data-i18n="source">Source:</label> <input type="text" id="combat-source" placeholder="e.g., Germany" aria-label="Combat source input" tabindex="0"></p>
                 <p><label data-i18n="units-to-move">Units to move:</label> <input type="text" id="combat-units" placeholder="e.g., 2 infantry, 1 tank" aria-label="Combat units input" tabindex="0"></p>
                 <p><label data-i18n="target">Target:</label> <input type="text" id="combat-target" placeholder="e.g., Western Europe" aria-label="Combat target input" tabindex="0"></p>
                 <button onclick="submitCombatMove()" aria-label="Submit combat move" data-i18n="submit-move" tabindex="0">Submit Move</button>
             </div>
             <div class="collapsible" onclick="toggleSection('non-combat-move')" aria-expanded="false" aria-controls="non-combat-move" data-i18n="non-combat-move" tabindex="0">Non-Combat Move</div>
             <div id="non-combat-move" class="content">
+                <p><label data-i18n="source">Source:</label> <input type="text" id="non-combat-source" placeholder="e.g., Russia" aria-label="Non-combat source input" tabindex="0"></p>
                 <p><label data-i18n="units-to-move">Units to move:</label> <input type="text" id="non-combat-units" placeholder="e.g., 1 fighter" aria-label="Non-combat units input" tabindex="0"></p>
-                <p><label data-i18n="target">Target:</label> <input type="text" id="non-combat-target" placeholder="e.g., Russia" aria-label="Non-combat target input" tabindex="0"></p>
+                <p><label data-i18n="target">Target:</label> <input type="text" id="non-combat-target" placeholder="e.g., Caucasus" aria-label="Non-combat target input" tabindex="0"></p>
                 <button onclick="submitNonCombatMove()" aria-label="Submit non-combat move" data-i18n="submit-move" tabindex="0">Submit Move</button>
+            </div>
+            <div class="collapsible" onclick="toggleSection('mobilize-units')" aria-expanded="false" aria-controls="mobilize-units" data-i18n="mobilize-units" tabindex="0">Mobilize Units</div>
+            <div id="mobilize-units" class="content">
+                <p><label data-i18n="factory">Factory:</label> <input type="text" id="mobilize-factory" placeholder="e.g., Germany" aria-label="Factory input" tabindex="0"></p>
+                <p><label data-i18n="units-to-place">Units to place:</label> <input type="text" id="mobilize-units" placeholder="e.g., 2 infantry" aria-label="Units to place input" tabindex="0"></p>
+                <button onclick="mobilizeUnits()" aria-label="Place units" data-i18n="place-units" tabindex="0">Place Units</button>
             </div>
             <div class="collapsible" onclick="toggleSection('chat-box')" aria-expanded="false" aria-controls="chat-box" data-i18n="chat" tabindex="0">Chat</div>
             <div id="chat-box" class="content"></div>
             <input type="text" id="chat-input" placeholder="Type a message..." aria-label="Chat input" tabindex="0">
             <button onclick="sendChat()" aria-label="Send chat message" data-i18n="send-message" tabindex="0">Send</button>
+            <div class="collapsible" onclick="toggleSection('settings')" aria-expanded="false" aria-controls="settings" data-i18n="settings" tabindex="0">Settings</div>
+            <div id="settings" class="content">
+                <p><label data-i18n="sound-volume">Sound Volume:</label> <input type="range" id="sound-volume" min="0" max="100" value="50" aria-label="Sound volume" tabindex="0"></p>
+                <p><label data-i18n="animation-speed">Animation Speed:</label> <input type="range" id="animation-speed" min="0" max="100" value="50" aria-label="Animation speed" tabindex="0"></p>
+                <p><label data-i18n="turn-timer">Turn Timer (min):</label> <input type="number" id="turn-timer" min="2" max="10" value="5" aria-label="Turn timer" tabindex="0"></p>
+                <button onclick="saveSettings()" aria-label="Save settings" data-i18n="save-settings" tabindex="0">Save Settings</button>
+            </div>
+            <div class="collapsible" onclick="toggleSection('player-stats')" aria-expanded="false" aria-controls="player-stats" data-i18n="player-stats" tabindex="0">Player Stats</div>
+            <div id="player-stats" class="content"></div>
         </div>
     </div>
     <div id="tutorial-prompt" role="alert"></div>
     <div id="error-modal">
         <p id="error-message"></p>
-        <button onclick="closeErrorModal()" aria-label="Close error modal">Close</button>
+        <button onclick="closeErrorModal()" aria-label="Close error modal" data-i18n="close">Close</button>
     </div>
+    <div id="context-menu" class="context-menu" role="menu">
+        <ul>
+            <li onclick="contextAction('move')" data-i18n="move-units" tabindex="0">Move Units</li>
+            <li onclick="contextAction('bomb')" data-i18n="bombing" tabindex="0">Strategic Bombing</li>
+            <li onclick="contextAction('repair')" data-i18n="repair-factory" tabindex="0">Repair Factory</li>
+        </ul>
+    </div>
+    <div class="territory-tooltip"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
@@ -313,6 +358,8 @@
                 'toggle-sound': "Toggle Sound",
                 'lang-en': "English",
                 'lang-de': "German",
+                'lang-fr': "French",
+                'lang-es': "Spanish",
                 player: "Player",
                 phase: "Phase",
                 ipcs: "IPCs",
@@ -327,6 +374,7 @@
                 'repair-factory': "Repair Factory",
                 'save-game': "Save Game",
                 'load-game': "Load Game",
+                'toggle-ai': "Toggle AI Opponent",
                 'how-to-play': "How to Play",
                 'how-to-play-title': "How to Play Axis & Allies 1942 Online",
                 welcome: "Welcome to Axis & Allies 1942 Online, a digital adaptation of the WWII strategy board game.",
@@ -334,10 +382,20 @@
                 'purchase-units': "Purchase Units",
                 'combat-move': "Combat Move",
                 'non-combat-move': "Non-Combat Move",
+                'mobilize-units': "Mobilize Units",
                 chat: "Chat",
+                settings: "Settings",
+                'player-stats': "Player Stats",
                 'confirm-purchase': "Confirm Purchase",
                 'submit-move': "Submit Move",
+                'place-units': "Place Units",
                 'send-message': "Send",
+                'sound-volume': "Sound Volume",
+                'animation-speed': "Animation Speed",
+                'turn-timer': "Turn Timer (min)",
+                'save-settings': "Save Settings",
+                close: "Close",
+                'move-units': "Move Units",
                 infantry: "Infantry (3 IPCs)",
                 'infantry-tooltip': "Attack: 1 (2 with artillery), Defense: 2, Move: 1",
                 artillery: "Artillery (4 IPCs)",
@@ -353,17 +411,20 @@
                 destroyers: "Destroyers (8 IPCs)",
                 'destroyers-tooltip': "Attack: 2, Defense: 2, Move: 2 (naval)",
                 transports: "Transports (7 IPCs)",
-                'transports-tooltip': "Attack: 0, Defense: 0, Move: 2 (naval)",
+                'transports-tooltip': "Attack: 0, Defense: 0, Move: 2 (naval), carries 2 land units",
                 battleships: "Battleships (20 IPCs)",
-                'battleships-tooltip': "Attack: 4, Defense: 4, Move: 2 (naval)",
+                'battleships-tooltip': "Attack: 4, Defense: 4, Move: 2 (naval), takes 2 hits",
                 submarines: "Submarines (6 IPCs)",
-                'submarines-tooltip': "Attack: 2, Defense: 1, Move: 2 (naval)",
+                'submarines-tooltip': "Attack: 2, Defense: 1, Move: 2 (naval), surprise strike",
                 carriers: "Carriers (14 IPCs)",
-                'carriers-tooltip': "Attack: 1, Defense: 2, Move: 2 (naval)",
+                'carriers-tooltip': "Attack: 1, Defense: 2, Move: 2 (naval), carries 2 fighters",
                 next: "Next",
                 skip: "Skip",
+                source: "Source",
                 'units-to-move': "Units to move",
-                target: "Target"
+                target: "Target",
+                factory: "Factory",
+                'units-to-place': "Units to place"
             },
             de: {
                 title: "Axis & Allies 1942 Online",
@@ -375,6 +436,8 @@
                 'toggle-sound': "Ton umschalten",
                 'lang-en': "Englisch",
                 'lang-de': "Deutsch",
+                'lang-fr': "Französisch",
+                'lang-es': "Spanisch",
                 player: "Spieler",
                 phase: "Phase",
                 ipcs: "IPCs",
@@ -389,6 +452,7 @@
                 'repair-factory': "Fabrik reparieren",
                 'save-game': "Spiel speichern",
                 'load-game': "Spiel laden",
+                'toggle-ai': "KI-Gegner umschalten",
                 'how-to-play': "Spielanleitung",
                 'how-to-play-title': "Spielanleitung für Axis & Allies 1942 Online",
                 welcome: "Willkommen bei Axis & Allies 1942 Online, einer digitalen Adaption des Strategiespiels aus dem Zweiten Weltkrieg.",
@@ -396,10 +460,20 @@
                 'purchase-units': "Einheiten kaufen",
                 'combat-move': "Kampfbewegung",
                 'non-combat-move': "Nicht-Kampfbewegung",
+                'mobilize-units': "Einheiten mobilisieren",
                 chat: "Chat",
+                settings: "Einstellungen",
+                'player-stats': "Spieler-Statistiken",
                 'confirm-purchase': "Kauf bestätigen",
                 'submit-move': "Zug absenden",
+                'place-units': "Einheiten platzieren",
                 'send-message': "Senden",
+                'sound-volume': "Lautstärke",
+                'animation-speed': "Animationsgeschwindigkeit",
+                'turn-timer': "Zugzeit (Minuten)",
+                'save-settings': "Einstellungen speichern",
+                close: "Schließen",
+                'move-units': "Einheiten bewegen",
                 infantry: "Infanterie (3 IPCs)",
                 'infantry-tooltip': "Angriff: 1 (2 mit Artillerie), Verteidigung: 2, Bewegung: 1",
                 artillery: "Artillerie (4 IPCs)",
@@ -415,26 +489,187 @@
                 destroyers: "Zerstörer (8 IPCs)",
                 'destroyers-tooltip': "Angriff: 2, Verteidigung: 2, Bewegung: 2 (naval)",
                 transports: "Transporter (7 IPCs)",
-                'transports-tooltip': "Angriff: 0, Verteidigung: 0, Bewegung: 2 (naval)",
+                'transports-tooltip': "Angriff: 0, Verteidigung: 0, Bewegung: 2 (naval), trägt 2 Landeinheiten",
                 battleships: "Schlachtschiffe (20 IPCs)",
-                'battleships-tooltip': "Angriff: 4, Verteidigung: 4, Bewegung: 2 (naval)",
+                'battleships-tooltip': "Angriff: 4, Verteidigung: 4, Bewegung: 2 (naval), hält 2 Treffer aus",
                 submarines: "U-Boote (6 IPCs)",
-                'submarines-tooltip': "Angriff: 2, Verteidigung: 1, Bewegung: 2 (naval)",
+                'submarines-tooltip': "Angriff: 2, Verteidigung: 1, Bewegung: 2 (naval), Überraschungsangriff",
                 carriers: "Flugzeugträger (14 IPCs)",
-                'carriers-tooltip': "Angriff: 1, Verteidigung: 2, Bewegung: 2 (naval)",
+                'carriers-tooltip': "Angriff: 1, Verteidigung: 2, Bewegung: 2 (naval), trägt 2 Jäger",
                 next: "Weiter",
                 skip: "Überspringen",
+                source: "Quelle",
                 'units-to-move': "Einheiten bewegen",
-                target: "Ziel"
+                target: "Ziel",
+                factory: "Fabrik",
+                'units-to-place': "Einheiten platzieren"
+            },
+            fr: {
+                title: "Axis & Allies 1942 Online",
+                'zoom-in': "Zoomer",
+                'zoom-out': "Dézoomer",
+                'toggle-theme': "Basculer en mode sombre",
+                'toggle-contrast': "Basculer en contraste élevé",
+                'toggle-colorblind': "Basculer en mode daltonien",
+                'toggle-sound': "Basculer le son",
+                'lang-en': "Anglais",
+                'lang-de': "Allemand",
+                'lang-fr': "Français",
+                'lang-es': "Espagnol",
+                player: "Joueur",
+                phase: "Phase",
+                ipcs: "IPCs",
+                'victory-cities': "Villes de victoire",
+                'selected-territory': "Territoire sélectionné",
+                notification: "Notification",
+                'next-phase': "Phase suivante",
+                'roll-dice': "Lancer les dés",
+                undo: "Annuler",
+                retreat: "Retraite",
+                bombing: "Bombardement stratégique",
+                'repair-factory': "Réparer l'usine",
+                'save-game': "Sauvegarder la partie",
+                'load-game': "Charger la partie",
+                'toggle-ai': "Basculer l'adversaire IA",
+                'how-to-play': "Comment jouer",
+                'how-to-play-title': "Comment jouer à Axis & Allies 1942 Online",
+                welcome: "Bienvenue dans Axis & Allies 1942 Online, une adaptation numérique du jeu de stratégie de la Seconde Guerre mondiale.",
+                rulebook: "Télécharger le livre de règles officiel",
+                'purchase-units': "Acheter des unités",
+                'combat-move': "Mouvement de combat",
+                'non-combat-move': "Mouvement non-combat",
+                'mobilize-units': "Mobiliser des unités",
+                chat: "Chat",
+                settings: "Paramètres",
+                'player-stats': "Statistiques des joueurs",
+                'confirm-purchase': "Confirmer l'achat",
+                'submit-move': "Soumettre le mouvement",
+                'place-units': "Placer des unités",
+                'send-message': "Envoyer",
+                'sound-volume': "Volume sonore",
+                'animation-speed': "Vitesse d'animation",
+                'turn-timer': "Minuteur de tour (min)",
+                'save-settings': "Enregistrer les paramètres",
+                close: "Fermer",
+                'move-units': "Déplacer des unités",
+                infantry: "Infanterie (3 IPCs)",
+                'infantry-tooltip': "Attaque : 1 (2 avec artillerie), Défense : 2, Mouvement : 1",
+                artillery: "Artillerie (4 IPCs)",
+                'artillery-tooltip': "Attaque : 2, Défense : 2, Mouvement : 1",
+                tanks: "Chars (6 IPCs)",
+                'tanks-tooltip': "Attaque : 3, Défense : 3, Mouvement : 2",
+                aag: "Canon AA (5 IPCs)",
+                'aag-tooltip': "Défense : 1 contre air, Mouvement : 1",
+                fighters: "Chasseurs (10 IPCs)",
+                'fighters-tooltip': "Attaque : 3, Défense : 4, Mouvement : 4",
+                bombers: "Bombardiers (12 IPCs)",
+                'bombers-tooltip': "Attaque : 4, Défense : 1, Mouvement : 6",
+                destroyers: "Destroyers (8 IPCs)",
+                'destroyers-tooltip': "Attaque : 2, Défense : 2, Mouvement : 2 (naval)",
+                transports: "Transports (7 IPCs)",
+                'transports-tooltip': "Attaque : 0, Défense : 0, Mouvement : 2 (naval), transporte 2 unités terrestres",
+                battleships: "Cuirassés (20 IPCs)",
+                'battleships-tooltip': "Attaque : 4, Défense : 4, Mouvement : 2 (naval), résiste à 2 coups",
+                submarines: "Sous-marins (6 IPCs)",
+                'submarines-tooltip': "Attaque : 2, Défense : 1, Mouvement : 2 (naval), attaque surprise",
+                carriers: "Porte-avions (14 IPCs)",
+                'carriers-tooltip': "Attaque : 1, Défense : 2, Mouvement : 2 (naval), transporte 2 chasseurs",
+                next: "Suivant",
+                skip: "Passer",
+                source: "Source",
+                'units-to-move': "Unités à déplacer",
+                target: "Cible",
+                factory: "Usine",
+                'units-to-place': "Unités à placer"
+            },
+            es: {
+                title: "Axis & Allies 1942 Online",
+                'zoom-in': "Acercar",
+                'zoom-out': "Alejar",
+                'toggle-theme': "Alternar modo oscuro",
+                'toggle-contrast': "Alternar alto contraste",
+                'toggle-colorblind': "Alternar modo daltónico",
+                'toggle-sound': "Alternar sonido",
+                'lang-en': "Inglés",
+                'lang-de': "Alemán",
+                'lang-fr': "Francés",
+                'lang-es': "Español",
+                player: "Jugador",
+                phase: "Fase",
+                ipcs: "IPCs",
+                'victory-cities': "Ciudades de victoria",
+                'selected-territory': "Territorio seleccionado",
+                notification: "Notificación",
+                'next-phase': "Siguiente fase",
+                'roll-dice': "Tirar dados",
+                undo: "Deshacer",
+                retreat: "Retirada",
+                bombing: "Bombardeo estratégico",
+                'repair-factory': "Reparar fábrica",
+                'save-game': "Guardar partida",
+                'load-game': "Cargar partida",
+                'toggle-ai': "Alternar oponente IA",
+                'how-to-play': "Cómo jugar",
+                'how-to-play-title': "Cómo jugar a Axis & Allies 1942 Online",
+                welcome: "Bienvenido a Axis & Allies 1942 Online, una adaptación digital del juego de estrategia de la Segunda Guerra Mundial.",
+                rulebook: "Descargar el libro de reglas oficial",
+                'purchase-units': "Comprar unidades",
+                'combat-move': "Movimiento de combate",
+                'non-combat-move': "Movimiento no de combate",
+                'mobilize-units': "Movilizar unidades",
+                chat: "Chat",
+                settings: "Configuraciones",
+                'player-stats': "Estadísticas de jugadores",
+                'confirm-purchase': "Confirmar compra",
+                'submit-move': "Enviar movimiento",
+                'place-units': "Colocar unidades",
+                'send-message': "Enviar",
+                'sound-volume': "Volumen del sonido",
+                'animation-speed': "Velocidad de animación",
+                'turn-timer': "Temporizador de turno (min)",
+                'save-settings': "Guardar configuraciones",
+                close: "Cerrar",
+                'move-units': "Mover unidades",
+                infantry: "Infantería (3 IPCs)",
+                'infantry-tooltip': "Ataque: 1 (2 con artillería), Defensa: 2, Movimiento: 1",
+                artillery: "Artillería (4 IPCs)",
+                'artillery-tooltip': "Ataque: 2, Defensa: 2, Movimiento: 1",
+                tanks: "Tanques (6 IPCs)",
+                'tanks-tooltip': "Ataque: 3, Defensa: 3, Movimiento: 2",
+                aag: "Cañón AA (5 IPCs)",
+                'aag-tooltip': "Defensa: 1 contra aire, Movimiento: 1",
+                fighters: "Cazas (10 IPCs)",
+                'fighters-tooltip': "Ataque: 3, Defensa: 4, Movimiento: 4",
+                bombers: "Bombarderos (12 IPCs)",
+                'bombers-tooltip': "Ataque: 4, Defensa: 1, Movimiento: 6",
+                destroyers: "Destructores (8 IPCs)",
+                'destroyers-tooltip': "Ataque: 2, Defensa: 2, Movimiento: 2 (naval)",
+                transports: "Transportes (7 IPCs)",
+                'transports-tooltip': "Ataque: 0, Defensa: 0, Movimiento: 2 (naval), transporta 2 unidades terrestres",
+                battleships: "Acorazados (20 IPCs)",
+                'battleships-tooltip': "Ataque: 4, Defensa: 4, Movimiento: 2 (naval), resiste 2 impactos",
+                submarines: "Submarinos (6 IPCs)",
+                'submarines-tooltip': "Ataque: 2, Defensa: 1, Movimiento: 2 (naval), ataque sorpresa",
+                carriers: "Portaaviones (14 IPCs)",
+                'carriers-tooltip': "Ataque: 1, Defensa: 2, Movimiento: 2 (naval), transporta 2 cazas",
+                next: "Siguiente",
+                skip: "Omitir",
+                source: "Origen",
+                'units-to-move': "Unidades a mover",
+                target: "Destino",
+                factory: "Fábrica",
+                'units-to-place': "Unidades a colocar"
             }
         };
-        let currentLang = 'en';
+        let currentLang = localStorage.getItem('language') || 'en';
         function changeLanguage(lang) {
             currentLang = lang;
+            localStorage.setItem('language', lang);
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 el.textContent = translations[lang][key] || el.textContent;
             });
+            updateUI();
         }
 
         // Game state
@@ -444,49 +679,49 @@
             players: ['Germany', 'Japan', 'USSR', 'UK', 'USA'],
             phaseOrder: ['Purchase Units', 'Combat Move', 'Combat', 'Non-Combat Move', 'Mobilize Units', 'Collect Income'],
             territories: {
-                'Germany': { owner: 'Germany', ipcs: 10, units: { infantry: 4, artillery: 2, tanks: 2, fighters: 1, bombers: 1, aag: 1 }, factory: true, victoryCity: true },
-                'Southern Europe': { owner: 'Germany', ipcs: 6, units: { infantry: 2, tanks: 1 }, factory: true },
+                'Germany': { owner: 'Germany', ipcs: 10, units: { infantry: 4, artillery: 2, tanks: 2, fighters: 1, bombers: 1, aag: 1 }, factory: true, victoryCity: true, damage: 0 },
+                'Southern Europe': { owner: 'Germany', ipcs: 6, units: { infantry: 2, tanks: 1 }, factory: true, damage: 0, victoryCity: true },
                 'Western Europe': { owner: 'Germany', ipcs: 5, units: { infantry: 2 }, factory: false },
                 'Eastern Europe': { owner: 'Germany', ipcs: 3, units: { infantry: 1 }, factory: false },
                 'Ukraine': { owner: 'Germany', ipcs: 3, units: { tanks: 1 }, factory: false },
                 'Norway': { owner: 'Germany', ipcs: 2, units: {}, factory: false },
                 'Finland': { owner: 'Germany', ipcs: 1, units: {}, factory: false },
-                'United Kingdom': { owner: 'UK', ipcs: 8, units: { infantry: 3, fighters: 2, aag: 1 }, factory: true, victoryCity: true },
-                'Russia': { owner: 'USSR', ipcs: 10, units: { infantry: 6, tanks: 2, fighters: 1, aag: 1 }, factory: true, victoryCity: true },
-                'Caucasus': { owner: 'USSR', ipcs: 4, units: { infantry: 2 }, factory: true },
+                'United Kingdom': { owner: 'UK', ipcs: 8, units: { infantry: 3, fighters: 2, aag: 1 }, factory: true, damage: 0, victoryCity: true },
+                'Russia': { owner: 'USSR', ipcs: 10, units: { infantry: 6, tanks: 2, fighters: 1, aag: 1 }, factory: true, damage: 0, victoryCity: true },
+                'Caucasus': { owner: 'USSR', ipcs: 4, units: { infantry: 2 }, factory: true, damage: 0 },
                 'Soviet Far East': { owner: 'USSR', ipcs: 2, units: { infantry: 2 }, factory: false },
                 'Egypt': { owner: 'UK', ipcs: 2, units: { infantry: 1 }, factory: false },
                 'Algeria': { owner: 'UK', ipcs: 1, units: {}, factory: false },
-                'French West Africa': { owner: null, ipcs: 1, units: {}, factory: false, neutral: true },
+                'French West Africa': { owner: null, ipcs: 1, units: {}, factory: false, neutral: true, alignment: 'Allies' },
                 'Gibraltar': { owner: 'UK', ipcs: 1, units: {}, factory: false },
                 'South Africa': { owner: 'UK', ipcs: 2, units: { infantry: 1 }, factory: false },
-                'Madagascar': { owner: null, ipcs: 1, units: {}, factory: false, neutral: true },
+                'Madagascar': { owner: null, ipcs: 1, units: {}, factory: false, neutral: true, alignment: 'Allies' },
                 'Italian East Africa': { owner: 'Germany', ipcs: 1, units: { infantry: 1 }, factory: false },
                 'Libya': { owner: 'Germany', ipcs: 1, units: { infantry: 1 }, factory: false },
-                'Japan': { owner: 'Japan', ipcs: 8, units: { infantry: 4, fighters: 2, bombers: 1, aag: 1 }, factory: true, victoryCity: true },
-                'Manchuria': { owner: 'Japan', ipcs: 3, units: { infantry: 2, tanks: 1 }, factory: true },
+                'Japan': { owner: 'Japan', ipcs: 8, units: { infantry: 4, fighters: 2, bombers: 1, aag: 1 }, factory: true, damage: 0, victoryCity: true },
+                'Manchuria': { owner: 'Japan', ipcs: 3, units: { infantry: 2, tanks: 1 }, factory: true, damage: 0 },
                 'China': { owner: 'USSR', ipcs: 2, units: { infantry: 2 }, factory: false },
-                'India': { owner: 'UK', ipcs: 3, units: { infantry: 2, fighters: 1 }, factory: true, victoryCity: true },
+                'India': { owner: 'UK', ipcs: 3, units: { infantry: 2, fighters: 1 }, factory: true, damage: 0, victoryCity: true },
                 'Philippine Islands': { owner: 'USA', ipcs: 2, units: { infantry: 1 }, factory: false },
                 'Burma': { owner: 'UK', ipcs: 1, units: { infantry: 1 }, factory: false },
                 'French Indo-China': { owner: 'Japan', ipcs: 2, units: { infantry: 1 }, factory: false },
                 'Iwo Jima': { owner: 'Japan', ipcs: 1, units: {}, factory: false },
                 'Okinawa': { owner: 'Japan', ipcs: 1, units: {}, factory: false },
                 'Wake Island': { owner: 'USA', ipcs: 1, units: {}, factory: false },
-                'Australia': { owner: 'UK', ipcs: 4, units: { infantry: 2 }, factory: true, victoryCity: true },
+                'Australia': { owner: 'UK', ipcs: 4, units: { infantry: 2 }, factory: true, damage: 0, victoryCity: true },
                 'New Guinea': { owner: 'Japan', ipcs: 1, units: { infantry: 1 }, factory: false },
                 'Solomon Islands': { owner: 'Japan', ipcs: 1, units: {}, factory: false },
                 'Borneo': { owner: 'UK', ipcs: 2, units: {}, factory: false },
                 'East Indies': { owner: 'UK', ipcs: 3, units: {}, factory: false },
                 'New Zealand': { owner: 'UK', ipcs: 2, units: {}, factory: false },
-                'Eastern United States': { owner: 'USA', ipcs: 10, units: { infantry: 3, fighters: 2, bombers: 1, aag: 1 }, factory: true, victoryCity: true },
-                'Western United States': { owner: 'USA', ipcs: 8, units: { infantry: 2, tanks: 1 }, factory: true },
+                'Eastern United States': { owner: 'USA', ipcs: 10, units: { infantry: 3, fighters: 2, bombers: 1, aag: 1 }, factory: true, damage: 0, victoryCity: true },
+                'Western United States': { owner: 'USA', ipcs: 8, units: { infantry: 2, tanks: 1 }, factory: true, damage: 0 },
                 'Alaska': { owner: 'USA', ipcs: 2, units: {}, factory: false },
                 'Hawaiian Islands': { owner: 'USA', ipcs: 2, units: { infantry: 1 }, factory: false },
                 'Midway': { owner: 'USA', ipcs: 1, units: {}, factory: false },
-                'Brazil': { owner: null, ipcs: 2, units: {}, factory: false, neutral: true },
-                'Turkey': { owner: null, ipcs: 2, units: {}, factory: false, neutral: true },
-                'Mongolia': { owner: null, ipcs: 1, units: {}, factory: false, neutral: true },
+                'Brazil': { owner: null, ipcs: 2, units: {}, factory: false, neutral: true, alignment: 'Allies' },
+                'Turkey': { owner: null, ipcs: 2, units: {}, factory: false, neutral: true, alignment: 'Axis' },
+                'Mongolia': { owner: null, ipcs: 1, units: {}, factory: false, neutral: true, alignment: 'Allies' },
                 'SZ 1': { owner: null, ipcs: 0, units: {}, factory: false },
                 'SZ 2': { owner: null, ipcs: 0, units: { destroyers: 1 }, factory: false },
                 'SZ 3': { owner: null, ipcs: 0, units: {}, factory: false },
@@ -570,474 +805,55 @@
             nonCombatMoves: [],
             victoryCities: {
                 'Germany': 'Berlin',
+                'Southern Europe': 'Rome',
                 'Japan': 'Tokyo',
                 'Russia': 'Moscow',
                 'United Kingdom': 'London',
                 'Eastern United States': 'Washington',
                 'India': 'Calcutta',
-                'Australia': 'Sydney',
-                'Southern Europe': 'Rome'
+                'Australia': 'Sydney'
             },
             lastAction: null,
             damagedFactories: {},
             combatRounds: {},
             moveHistory: {},
-            playerStats: {},
+            playerStats: {
+                'Germany': { territories: 7, unitsLost: 0, ipcsSpent: 0 },
+                'Japan': { territories: 5, unitsLost: 0, ipcsSpent: 0 },
+                'USSR': { territories: 3, unitsLost: 0, ipcsSpent: 0 },
+                'UK': { territories: 8, unitsLost: 0, ipcsSpent: 0 },
+                'USA': { territories: 5, unitsLost: 0, ipcsSpent: 0 }
+            },
             roomCode: '',
-            turnTimer: 300,
-            neutralConquered: {}
+            turnTimer: parseInt(localStorage.getItem('turnTimer') || '300'),
+            neutralConquered: {},
+            aiEnabled: false
         };
 
         // Unit stats
         const unitStats = {
-            infantry: { cost: 3, attack: 1, defense: 2, move: 1, type: 'land', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm-1 6h2v8H9z"/></svg>' },
-            artillery: { cost: 4, attack: 2, defense: 2, move: 1, type: 'land', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 15h12l-3-8H7zM3 15h14v2H3z"/></svg>' },
-            tanks: { cost: 6, attack: 3, defense: 3, move: 2, type: 'land', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 6h12v8H4zM3 14h14v2H3z"/></svg>' },
-            aag: { cost: 5, attack: 0, defense: 1, move: 1, type: 'land', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 4v8m-6 0h12"/></svg>' },
-            fighters: { cost: 10, attack: 3, defense: 4, move: 4, type: 'air', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 4L2 8l8 8 8-8z"/></svg>' },
-            bombers: { cost: 12, attack: 4, defense: 1, move: 6, type: 'air', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 4L4 8l6 8 6-8z"/></svg>' },
-            destroyers: { cost: 8, attack: 2, defense: 2, move: 2, type: 'naval', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 10h12l-2 4H6z"/></svg>' },
-            transports: { cost: 7, attack: 0, defense: 0, move: 2, type: 'naval', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 8h12v4H4z"/></svg>' },
-            battleships: { cost: 20, attack: 4, defense: 4, move: 2, type: 'naval', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 6h12l-3 8H7z"/></svg>' },
-            submarines: { cost: 6, attack: 2, defense: 1, move: 2, type: 'naval', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 10h10l2-2H4z"/></svg>' },
-            carriers: { cost: 14, attack: 1, defense: 2, move: 2, type: 'naval', icon: '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 8h12v2H4zM6 10h8v2H6z"/></svg>' }
+            infantry: { cost: 3, attack: 1, defense: 2, move: 1, type: 'land', icon: '<svg class="unit-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm-1 6h2v8H9z"/></svg>', special: 'Boosted by artillery' },
+            artillery: { cost: 4, attack: 2, defense: 2, move: 1, type: 'land', icon: '<svg class="unit-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M4 15h12l-3-8H7zM3 15h14v2H3z"/></svg>', special: 'Boosts infantry attack to 2' },
+            tanks: { cost: 6, attack: 3, defense: 3, move: 2, type: 'land', icon: '<svg class="unit-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M4 6h12v8H4zM3 14h14v2H3z"/></svg>' },
+            aag: { cost: 5, attack: 0, defense: 1, move: 1, type: 'land', icon: '<svg class="unit-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 4v8m-6 0h12"/></svg>', special: 'Defends against air units' },
+            fighters: { cost: 10, attack: 3, defense: 4, move: 4, type: 'air', icon: '<svg class="unit-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 4L2 8l8 8 8-8z"/></svg>', special: 'Can land on carriers' },
+            bombers: { cost: 12, attack: 4, defense: 1, move: 6, type: 'air', icon: '<svg class="unit-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 4L4 8l6 8 6-8z"/></svg>', special: 'Can perform strategic bombing' },
+            destroyers: { cost: 8, attack: 2, defense: 2, move: 2, type: 'naval', icon: '<svg class="unit-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M4 10h12l-2 4H6z"/></svg>', special: 'Blocks submarine surprise strikes' },
+            transports: { cost: 7, attack: 0, defense: 0, move: 2, type: 'naval', icon: '<svg class="unit-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M4 8h12v4H4z"/></svg>', special: 'Carries 2 land units' },
+            battleships: { cost: 20, attack: 4, defense: 4, move: 2, type: 'naval', icon: '<svg class="unit-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M4 6h12l-3 8H7z"/></svg>', special: 'Takes 2 hits' },
+            submarines: { cost: 6, attack: 2, defense: 1, move: 2, type: 'naval', icon: '<svg class="unit-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M4 10h10l2-2H4z"/></svg>', special: 'Surprise strike, submerge' },
+            carriers: { cost: 14, attack: 1, defense: 2, move: 2, type: 'naval', icon: '<svg class="unit-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M4 8h12v2H4zM6 10h8v2H6z"/></svg>', special: 'Carries 2 fighters' }
         };
 
-        // Territory positions (further spread out)
+        // Territory positions (maximally spread out)
         const territoryPositions = {
-            'Eastern United States': { x: 400, y: 800 },
-            'Western United States': { x: 200, y: 800 },
-            'Alaska': { x: 120, y: 300 },
-            'Hawaiian Islands': { x: 600, y: 1200 },
-            'Midway': { x: 700, y: 1200 },
-            'Brazil': { x: 500, y: 1100 },
-            'Germany': { x: 1600, y: 500 },
-            'Southern Europe': { x: 1600, y: 800 },
-            'Western Europe': { x: 1400, y: 600 },
-            'Eastern Europe': { x: 1800, y: 600 },
-            'Ukraine': { x: 1800, y: 900 },
-            'Norway': { x: 1600, y: 300 },
-            'Finland': { x: 1800, y: 300 },
-            'United Kingdom': { x: 1200, y: 500 },
-            'Russia': { x: 2000, y: 600 },
-            'Caucasus': { x: 2000, y: 900 },
-            'Soviet Far East': { x: 2400, y: 800 },
-            'Egypt': { x: 1400, y: 1000 },
-            'Algeria': { x: 1200, y: 1000 },
-            'French West Africa': { x: 1000, y: 1200 },
-            'Gibraltar': { x: 1200, y: 800 },
-            'South Africa': { x: 1400, y: 1400 },
-            'Madagascar': { x: 1600, y: 1600 },
-            'Italian East Africa': { x: 1600, y: 1200 },
-            'Libya': { x: 1400, y: 1200 },
-            'Japan': { x: 2800, y: 800 },
-            'Manchuria': { x: 2600, y: 600 },
-            'China': { x: 2400, y: 800 },
-            'India': { x: 2000, y: 1000 },
-            'Philippine Islands': { x: 2600, y: 1200 },
-            'Burma': { x: 2200, y: 1200 },
-            'French Indo-China': { x: 2400, y: 1200 },
-            'Iwo Jima': { x: 3000, y: 1000 },
-            'Okinawa': { x: 2800, y: 1000 },
-            'Wake Island': { x: 800, y: 1200 },
-            'Australia': { x: 2600, y: 1600 },
-            'New Guinea': { x: 2800, y: 1400 },
-            'Solomon Islands': { x: 3000, y: 1400 },
-            'Borneo': { x: 2400, y: 1400 },
-            'East Indies': { x: 2200, y: 1400 },
-            'New Zealand': { x: 2800, y: 1800 },
-            'Turkey': { x: 1800, y: 900 },
-            'Mongolia': { x: 2200, y: 600 },
-            'SZ 1': { x: 200, y: 200 },
-            'SZ 2': { x: 1200, y: 300 },
-            'SZ 3': { x: 1400, y: 200 },
-            'SZ 4': { x: 1600, y: 200 },
-            'SZ 5': { x: 1600, y: 400 },
-            'SZ 6': { x: 2800, y: 600 },
-            'SZ 7': { x: 2600, y: 500 },
-            'SZ 8': { x: 2000, y: 1200 },
-            'SZ 9': { x: 2200, y: 1300 },
-            'SZ 10': { x: 700, y: 1100 },
-            'SZ 11': { x: 2400, y: 1300 },
-            'SZ 12': { x: 2600, y: 1400 },
-            'SZ 13': { x: 2000, y: 1100 },
-            'SZ 14': { x: 1400, y: 1300 },
-            'SZ 15': { x: 1200, y: 1100 }
-        };
-
-        // Region groups for keyboard navigation
-        const territoryRegions = {
-            Americas: ['Eastern United States', 'Western United States', 'Alaska', 'Hawaiian Islands', 'Midway', 'Brazil'],
-            Europe: ['Germany', 'Southern Europe', 'Western Europe', 'Eastern Europe', 'Ukraine', 'Norway', 'Finland', 'United Kingdom', 'Russia', 'Caucasus'],
-            Africa: ['Egypt', 'Algeria', 'French West Africa', 'Gibraltar', 'South Africa', 'Madagascar', 'Italian East Africa', 'Libya'],
-            Asia: ['Soviet Far East', 'Japan', 'Manchuria', 'China', 'India', 'Philippine Islands', 'Burma', 'French Indo-China', 'Turkey', 'Mongolia'],
-            Pacific: ['Iwo Jima', 'Okinawa', 'Wake Island', 'Australia', 'New Guinea', 'Solomon Islands', 'Borneo', 'East Indies', 'New Zealand'],
-            SeaZones: Object.keys(territoryPositions).filter(t => t.startsWith('SZ'))
-        };
-
-        // Canvas and p5.js setup
-        let zoomLevel = 1;
-        let offsetX = 0, offsetY = 0;
-        let selectedTerritory = 'None';
-        let username = '';
-        let tutorialStep = parseInt(localStorage.getItem('tutorialStep') || '0');
-        let offscreenCanvas, offscreenCtx;
-        let isDragging = false;
-        let lastMouseX, lastMouseY;
-        let diceAnimation = null;
-        let tooltip = { visible: false, x: 0, y: 0, content: '' };
-        const tutorialSteps = [
-            'Welcome! Click or tap a territory to select it.',
-            'In Purchase Units, enter quantities and click Confirm Purchase.',
-            'In Combat Move, select a territory, enter units, and specify a target.',
-            'Click Roll Dice in Combat phase to resolve battles.',
-            'In Non-Combat Move, move units to friendly territories.',
-            'Place units in Mobilize Units phase. Click Next Phase to continue.'
-        ];
-
-        function setup() {
-            let canvas = createCanvas(2000, 1400);
-            canvas.parent('game-canvas');
-            textAlign(CENTER, CENTER);
-            offscreenCanvas = createGraphics(2000, 1400);
-            offscreenCtx = offscreenCanvas.drawingContext;
-            drawStaticMap();
-            canvas.elt.addEventListener('keydown', handleKeyNavigation);
-            loop();
-        }
-
-        function drawStaticMap() {
-            offscreenCanvas.background(220);
-            try {
-                offscreenCanvas.image(mapImage, 0, 0, 2000, 1400);
-            } catch (e) {
-                offscreenCanvas.fill(200, 220, 255);
-                offscreenCanvas.rect(0, 0, 2000, 1400);
-            }
-            // Draw region backgrounds
-            offscreenCanvas.noStroke();
-            offscreenCanvas.fill(200, 200, 200, 50);
-            offscreenCanvas.rect(100, 200, 600, 1000); // Americas
-            offscreenCanvas.fill(200, 180, 200, 50);
-            offscreenCanvas.rect(1100, 200, 900, 700); // Europe
-            offscreenCanvas.fill(180, 200, 180, 50);
-            offscreenCanvas.rect(1000, 800, 600, 600); // Africa
-            offscreenCanvas.fill(200, 200, 180, 50);
-            offscreenCanvas.rect(1800, 500, 800, 700); // Asia
-            offscreenCanvas.fill(180, 200, 200, 50);
-            offscreenCanvas.rect(2000, 900, 800, 600); // Pacific
-            // Draw connections
-            offscreenCanvas.stroke(0);
-            offscreenCanvas.strokeWeight(2);
-            for (let territory in gameState.connections) {
-                const pos1 = territoryPositions[territory];
-                gameState.connections[territory].forEach(adj => {
-                    const pos2 = territoryPositions[adj];
-                    if (pos1 && pos2) offscreenCanvas.line(pos1.x, pos1.y, pos2.x, pos2.y);
-                });
-            }
-        }
-
-        function draw() {
-            background(220);
-            push();
-            translate(offsetX, offsetY);
-            scale(zoomLevel);
-            image(offscreenCanvas, 0, 0);
-            for (let territory in territoryPositions) {
-                const pos = territoryPositions[territory];
-                const owner = gameState.territories[territory].owner;
-                fill(owner === 'Germany' ? '#ff3333' :
-                     owner === 'Japan' ? '#ff9900' :
-                     owner === 'USA' ? '#3333ff' :
-                     owner === 'UK' ? '#33cc33' :
-                     owner === 'USSR' ? '#990099' : '#999999');
-                if (territory === selectedTerritory) {
-                    fill(255, 255, 0, 150);
-                    let pulse = sin(frameCount * 0.1) * 10 + 35;
-                    ellipse(pos.x, pos.y, pulse, pulse);
-                    fill(owner || '#999999');
-                }
-                ellipse(pos.x, pos.y, territory.startsWith('SZ') ? 30 : 35);
-                stroke(0);
-                strokeWeight(1 / zoomLevel);
-                noFill();
-                ellipse(pos.x, pos.y, territory.startsWith('SZ') ? 30 : 35);
-                fill(0);
-                noStroke();
-                textSize(18 / zoomLevel);
-                text(territory, pos.x, pos.y - 40 / zoomLevel);
-                textSize(16 / zoomLevel);
-                text(`(${gameState.territories[territory].ipcs})`, pos.x, pos.y - 20 / zoomLevel);
-                const units = gameState.territories[territory].units || {};
-                let xOffset = pos.x - 60;
-                let yOffset = pos.y + 50 / zoomLevel;
-                let col = 0;
-                for (let unit in units) {
-                    if (units[unit] > 0) {
-                        if (col > 2) {
-                            col = 0;
-                            yOffset += 30 / zoomLevel;
-                            xOffset = pos.x - 60;
-                        }
-                        fill(owner === 'Germany' ? '#cc0000' :
-                             owner === 'Japan' ? '#cc6600' :
-                             owner === 'USA' ? '#0000cc' :
-                             owner === 'UK' ? '#009900' :
-                             owner === 'USSR' ? '#660066' : '#666666');
-                        text(unitStats[unit].icon, xOffset, yOffset);
-                        fill(0);
-                        text(units[unit], xOffset + 20, yOffset);
-                        xOffset += 60;
-                        col++;
-                    }
-                }
-            }
-            if (diceAnimation) {
-                fill(255, 255, 255, 200);
-                rect(950, 650, 100, 100, 10);
-                fill(0);
-                textSize(40);
-                text(diceAnimation.value, 1000, 700);
-                diceAnimation.frame--;
-                if (diceAnimation.frame <= 0) diceAnimation = null;
-            }
-            pop();
-            // Draw tooltip
-            if (tooltip.visible) {
-                const tooltipEl = document.querySelector('.territory-tooltip');
-                tooltipEl.style.left = `${tooltip.x}px`;
-                tooltipEl.style.top = `${tooltip.y}px`;
-                tooltipEl.innerHTML = tooltip.content;
-                tooltipEl.style.display = 'block';
-            } else {
-                document.querySelector('.territory-tooltip').style.display = 'none';
-            }
-        }
-
-        // Load map image
-        let mapImage;
-        function preload() {
-            mapImage = loadImage('https://via.placeholder.com/2000x1400.png?text=Axis+and+Allies+1942+Map', () => redraw(), () => {
-                showError('Failed to load map image.');
-                redraw();
-            });
-        }
-
-        // Socket.IO
-        const socket = io('http://localhost:3000', { transports: ['websocket'], compression: true });
-        let sessionId = localStorage.getItem('sessionId') || null;
-        socket.on('connect', () => {
-            const savedSession = JSON.parse(localStorage.getItem('session') || '{}');
-            const roomCode = prompt('Enter room code (leave blank for public):', savedSession.roomCode || '').trim();
-            username = prompt('Enter your username:', savedSession.username || '').trim() || 'Player_' + socket.id.slice(0, 4);
-            socket.emit('joinGame', { username, roomCode, sessionId, isSpectator: false });
-            sessionId = socket.id;
-            localStorage.setItem('sessionId', sessionId);
-            localStorage.setItem('session', JSON.stringify({ username, roomCode }));
-            requestNotificationPermission();
-            registerServiceWorker();
-        });
-        socket.on('gameState', (state) => {
-            mergeState(gameState, state);
-            updateUI();
-            redraw();
-            checkVictory();
-            showTutorial();
-        });
-        socket.on('chatMessage', (data) => {
-            const chatBox = document.getElementById('chat-box');
-            chatBox.innerHTML += `<p><strong>${data.username}:</strong> ${data.message} <small>(${new Date().toLocaleTimeString()})</small></p>`;
-            chatBox.scrollTop = chatBox.scrollHeight;
-        });
-        socket.on('turnNotification', (data) => {
-            document.getElementById('notification').textContent = `It's ${data.player}'s turn! (${data.timeLeft}s left)`;
-            if (data.player === username && 'Notification' in window && Notification.permission === 'granted') {
-                new Notification(`Your turn in Axis & Allies! (${data.timeLeft}s)`);
-            }
-        });
-        socket.on('gameOver', (data) => {
-            showError(`${data.winner} wins! Game Over.`);
-            alert(`${data.winner} wins! Game Over.`);
-        });
-        socket.on('playerList', (data) => {
-            document.getElementById('notification').textContent += ` | Players: ${data.players.join(', ')} | Spectators: ${data.spectators.join(', ')}`;
-        });
-        socket.on('error', (data) => {
-            showError(data.message);
-        });
-
-        // Service worker for caching
-        function registerServiceWorker() {
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/sw.js').catch(err => console.error('Service Worker registration failed:', err));
-            }
-        }
-
-        // Merge state
-        function mergeState(target, source) {
-            for (let key in source) {
-                if (typeof source[key] === 'object' && source[key] !== null && !Array.isArray(source[key])) {
-                    target[key] = target[key] || {};
-                    mergeState(target[key], source[key]);
-                } else {
-                    target[key] = source[key];
-                }
-            }
-        }
-
-        // Zoom and pan
-        function zoomIn() { zoomLevel = Math.min(zoomLevel + 0.2, 5); redraw(); }
-        function zoomOut() { zoomLevel = Math.max(zoomLevel - 0.2, 0.3); redraw(); }
-        function mousePressed() {
-            isDragging = true;
-            lastMouseX = mouseX;
-            lastMouseY = mouseY;
-            handleTerritoryClick(mouseX, mouseY);
-        }
-        function mouseReleased() { isDragging = false; }
-        function mouseDragged() {
-            if (isDragging) {
-                offsetX += (mouseX - lastMouseX) / zoomLevel;
-                offsetY += (mouseY - lastMouseY) / zoomLevel;
-                offsetX = constrain(offsetX, -2000 / zoomLevel, 2000 / zoomLevel);
-                offsetY = constrain(offsetY, -1400 / zoomLevel, 1400 / zoomLevel);
-                lastMouseX = mouseX;
-                lastMouseY = mouseY;
-                redraw();
-            }
-        }
-        function touchStarted() {
-            if (touches.length === 1) {
-                isDragging = true;
-                lastMouseX = touches[0].x;
-                lastMouseY = touches[0].y;
-                handleTerritoryClick(touches[0].x, touches[0].y);
-            }
-            return false;
-        }
-        function touchMoved() {
-            if (touches.length === 1 && isDragging) {
-                offsetX += (touches[0].x - lastMouseX) / zoomLevel;
-                offsetY += (touches[0].y - lastMouseY) / zoomLevel;
-                offsetX = constrain(offsetX, -2000 / zoomLevel, 2000 / zoomLevel);
-                offsetY = constrain(offsetY, -1400 / zoomLevel, 1400 / zoomLevel);
-                lastMouseX = touches[0].x;
-                lastMouseY = touches[0].y;
-                redraw();
-            } else if (touches.length === 2) {
-                let dist = dist(touches[0].x, touches[0].y, touches[1].x, touches[1].y);
-                if (!lastMouseX.dist) lastMouseX = { dist };
-                let scaleChange = dist / lastMouseX.dist;
-                zoomLevel = constrain(zoomLevel * scaleChange, 0.3, 5);
-                lastMouseX = { dist };
-                redraw();
-            }
-            return false;
-        }
-        function touchEnded() { isDragging = false; lastMouseX = null; return false; }
-        function mouseMoved() {
-            let worldX = (mouseX - offsetX) / zoomLevel;
-            let worldY = (mouseY - offsetY) / zoomLevel;
-            let found = false;
-            for (let territory in territoryPositions) {
-                const pos = territoryPositions[territory];
-                if (dist(worldX, worldY, pos.x, pos.y) < (territory.startsWith('SZ') ? 30 : 35)) {
-                    const units = gameState.territories[territory].units || {};
-                    let unitList = Object.entries(units).filter(([_, count]) => count > 0).map(([unit, count]) => `${count} ${unit}`).join(', ');
-                    tooltip = {
-                        visible: true,
-                        x: mouseX + 10,
-                        y: mouseY - 10,
-                        content: `${territory}<br>Owner: ${gameState.territories[territory].owner || 'Neutral'}<br>IPCs: ${gameState.territories[territory].ipcs}<br>Units: ${unitList || 'None'}`
-                    };
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) tooltip.visible = false;
-            redraw();
-        }
-        function handleTerritoryClick(x, y) {
-            let worldX = (x - offsetX) / zoomLevel;
-            let worldY = (y - offsetY) / zoomLevel;
-            selectedTerritory = 'None';
-            for (let territory in territoryPositions) {
-                const pos = territoryPositions[territory];
-                if (dist(worldX, worldY, pos.x, pos.y) < (territory.startsWith('SZ') ? 30 : 35)) {
-                    selectedTerritory = territory;
-                    break;
-                }
-            }
-            document.getElementById('selected-territory').textContent = selectedTerritory;
-            redraw();
-        }
-
-        // Keyboard navigation
-        function handleKeyNavigation(event) {
-            const territories = Object.keys(territoryPositions);
-            let currentIndex = territories.indexOf(selectedTerritory);
-            let region = Object.keys(territoryRegions).find(r => territoryRegions[r].includes(selectedTerritory)) || 'Europe';
-            let regionTerritories = territoryRegions[region];
-            if (event.key === 'ArrowRight') {
-                let indexInRegion = regionTerritories.indexOf(selectedTerritory);
-                indexInRegion = (indexInRegion + 1) % regionTerritories.length;
-                selectedTerritory = regionTerritories[indexInRegion];
-            } else if (event.key === 'ArrowLeft') {
-                let indexInRegion = regionTerritories.indexOf(selectedTerritory);
-                indexInRegion = (indexInRegion - 1 + regionTerritories.length) % regionTerritories.length;
-                selectedTerritory = regionTerritories[indexInRegion];
-            } else if (event.key === 'ArrowUp') {
-                const regions = Object.keys(territoryRegions);
-                let regionIndex = regions.indexOf(region);
-                regionIndex = (regionIndex - 1 + regions.length) % regions.length;
-                region = regions[regionIndex];
-                selectedTerritory = territoryRegions[region][0];
-            } else if (event.key === 'ArrowDown') {
-                const regions = Object.keys(territoryRegions);
-                let regionIndex = regions.indexOf(region);
-                regionIndex = (regionIndex + 1) % regions.length;
-                region = regions[regionIndex];
-                selectedTerritory = territoryRegions[region][0];
-            } else if (event.key === 'Enter') {
-                if (selectedTerritory !== 'None') {
-                    document.getElementById('combat-target').value = selectedTerritory;
-                    document.getElementById('non-combat-target').value = selectedTerritory;
-                }
-            }
-            document.getElementById('selected-territory').textContent = selectedTerritory;
-            redraw();
-        }
-
-        // UI functions
-        function toggleSection(id) {
-            const content = document.getElementById(id);
-            const collapsible = content.previousElementSibling;
-            const isOpen = content.style.display === 'block';
-            content.style.display = isOpen ? 'none' : 'block';
-            collapsible.setAttribute('aria-expanded', !isOpen);
-        }
-        function updateUI() {
-            document.getElementById('current-player').textContent = username + ` (${gameState.currentPlayer})`;
-            document.getElementById('current-phase').textContent = gameState.currentPhase;
-            document.getElementById('player-ipcs').textContent = gameState.ipcs[gameState.currentPlayer] || 0;
-            let axisCities = 0, alliesCities = 0;
-            for (let territory in gameState.victoryCities) {
-                const owner = gameState.territories[territory].owner;
-                if (owner === 'Germany' || owner === 'Japan') axisCities++;
-                else if (owner === 'USSR' || owner === 'UK' || owner === 'USA') alliesCities++;
-            }
-            document.getElementById('victory-cities').textContent = `Axis: ${axisCities}/8, Allies: ${alliesCities}/8`;
-            const phaseIndex = gameState.phaseOrder.indexOf(gameState.currentPhase);
-            document.getElementById('phase-progress-bar').style.width = `${(phaseIndex + 1) * 16.67}%`;
-            ['unit-purchase', 'combat-move', 'non-combat-move'].forEach(id => {
-                const content = document.getElementById(id);
-                const collapsible = content.previousElementSibling;
-                const shouldShow = id === gameState.currentPhase.toLowerCase().replace(' ', '-');
-                content.style.display = shouldShow ? 'block' : 'none';
-                collapsible.setAttribute('aria-expanded', shouldShow);
-            });
-        }
-
-        // Error modal
-        function showError(message) {
+            'Eastern United States': { x: 480, y: 960 },
+            'Western United States': { x: 240, y: 960 },
+            'Alaska': { x: 144, y: 360 },
+            'Hawaiian Islands': { x: 720, y: 1440 },
+            'Midway': { x: 840, y: 1440 },
+            'Brazil': { x: 600, y: 1320 },
+            'Germany': { x: 1920, y: 600 },
+            'Southern Europe': { x: 1920, y: 960 },
+            'Western Europe': { x: 1680, y: 720 },
+            '
